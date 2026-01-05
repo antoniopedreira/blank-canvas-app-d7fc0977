@@ -1,26 +1,43 @@
-import js from "@eslint/js";
 import globals from "globals";
-import reactHooks from "eslint-plugin-react-hooks";
-import reactRefresh from "eslint-plugin-react-refresh";
-import tseslint from "typescript-eslint";
+import pluginJs from "@eslint/js";
+import pluginReact from "eslint-plugin-react";
+import pluginReactHooks from "eslint-plugin-react-hooks";
 
-export default tseslint.config(
-  { ignores: ["dist"] },
+export default [
   {
-    extends: [js.configs.recommended, ...tseslint.configs.recommended],
-    files: ["**/*.{ts,tsx}"],
-    languageOptions: {
-      ecmaVersion: 2020,
-      globals: globals.browser,
+    files: [
+      "src/components/**/*.{js,mjs,cjs,jsx}",
+      "src/pages/**/*.{js,mjs,cjs,jsx}",
+      "src/Layout.jsx",
+    ],
+    languageOptions: { globals: globals.browser },
+    ...pluginJs.configs.recommended,
+  },
+  {
+    files: [
+      "src/components/**/*.{js,mjs,cjs,jsx}",
+      "src/pages/**/*.{js,mjs,cjs,jsx}",
+      "src/Layout.jsx",
+    ],
+    ...pluginReact.configs.flat.recommended,
+    settings: {
+      react: {
+        version: "detect",
+      },
     },
     plugins: {
-      "react-hooks": reactHooks,
-      "react-refresh": reactRefresh,
+      react: pluginReact,
+      "react-hooks": pluginReactHooks,
     },
     rules: {
-      ...reactHooks.configs.recommended.rules,
-      "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
-      "@typescript-eslint/no-unused-vars": "off",
+      "no-unused-vars": "off",
+      "react/prop-types": "off",
+      "react/react-in-jsx-scope": "off",
+      "react/no-unknown-property": [
+        "error",
+        { ignore: ["cmdk-input-wrapper", "toast-close"] },
+      ],
+      "react-hooks/rules-of-hooks": "error",
     },
   },
-);
+];
