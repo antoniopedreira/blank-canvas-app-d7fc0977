@@ -1,5 +1,4 @@
 import AIAssistant from './pages/AIAssistant';
-import Auth from './pages/Auth';
 import BankConnections from './pages/BankConnections';
 import BankConnectionsNew from './pages/BankConnectionsNew';
 import Content from './pages/Content';
@@ -16,7 +15,6 @@ import __Layout from './Layout.jsx';
 
 export const PAGES = {
     "AIAssistant": AIAssistant,
-    "Auth": Auth,
     "BankConnections": BankConnections,
     "BankConnectionsNew": BankConnectionsNew,
     "Content": Content,
